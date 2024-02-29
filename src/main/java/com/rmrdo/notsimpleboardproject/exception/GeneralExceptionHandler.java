@@ -1,6 +1,6 @@
 package com.rmrdo.notsimpleboardproject.exception;
 
-import com.rmrdo.notsimpleboardproject.utils.ApiUtils;
+import com.rmrdo.notsimpleboardproject.common.utils.ApiUtils;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
@@ -28,8 +28,8 @@ public class GeneralExceptionHandler {
 	}
 
 	@ExceptionHandler({
-		NoHandlerFoundException.class,
-		NotFoundException.class
+			NoHandlerFoundException.class,
+			NotFoundException.class
 	})
 	public ResponseEntity<?> handleNotFoundException(Exception e) {
 		return newResponse(e, HttpStatus.NOT_FOUND);

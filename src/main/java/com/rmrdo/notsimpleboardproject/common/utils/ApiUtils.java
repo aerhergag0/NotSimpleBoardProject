@@ -1,4 +1,4 @@
-package com.rmrdo.notsimpleboardproject.utils;
+package com.rmrdo.notsimpleboardproject.common.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

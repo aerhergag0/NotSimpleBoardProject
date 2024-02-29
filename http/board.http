@@ -1,0 +1,9 @@
+### 게시글 등록
+POST http://localhost:8080/v1/board
+Content-Type: application/json
+
+{
+  "title": "Test Title2",
+  "content": "Test Content2",
+  "writer": "Test Writer2"
+}
