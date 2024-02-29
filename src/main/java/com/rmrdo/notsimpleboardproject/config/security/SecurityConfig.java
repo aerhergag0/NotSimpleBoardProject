@@ -19,9 +19,9 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf(CsrfConfigurer::disable)
 				.authorizeHttpRequests(auth -> auth
-					.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-					.requestMatchers("/v1/**").permitAll()
-					.anyRequest().authenticated())
+						.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+						.requestMatchers("/v1/**").permitAll()
+						.anyRequest().authenticated())
 				.formLogin(Customizer.withDefaults());
 
 		return httpSecurity.build();
