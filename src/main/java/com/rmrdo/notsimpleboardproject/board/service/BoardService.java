@@ -4,6 +4,7 @@ import com.rmrdo.notsimpleboardproject.board.dto.BoardRequest;
 import com.rmrdo.notsimpleboardproject.board.dto.BoardResponse;
 import com.rmrdo.notsimpleboardproject.board.mapper.BoardMapper;
 import com.rmrdo.notsimpleboardproject.board.repository.BoardRepository;
+import com.rmrdo.notsimpleboardproject.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,35 @@ public class BoardService {
 	public BoardResponse postBoard(BoardRequest boardRequest) {
 		var entity = mapper.toEntity(boardRequest);
 		var newEntity = boardRepository.save(entity);
-		var response = mapper.boardEntityToBoardResponse(newEntity);
 
-		return response;
+		return mapper.boardEntityToBoardResponse(newEntity);
 	}
+
+	public BoardResponse getBoardOne(Long id) {
+		var entity = boardRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Not Found"));
+
+		return mapper.boardEntityToBoardResponse(entity);
+	}
+
+	public BoardResponse putBoard(Long id, BoardRequest boardRequest) {
+
+		var entity = boardRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Not Found"));
+
+		entity.updateTitleAndContent(boardRequest.getTitle(), boardRequest.getContent());
+
+		boardRepository.updateTitleAndContentById(entity.getTitle(), entity.getContent(), id);
+
+		return mapper.boardEntityToBoardResponse(entity);
+	}
+	public BoardResponse deleteBoard(Long id) {
+
+		var entity = boardRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Not Found"));
+
+		boardRepository.deleteById(id);
+		return mapper.boardEntityToBoardResponse(entity);
+	}
+
 }

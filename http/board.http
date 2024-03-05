@@ -7,3 +7,21 @@ Content-Type: application/json
   "content": "Test Content2",
   "writer": "Test Writer2"
 }
+
+### 게시글 조회
+GET http://localhost:8080/v1/board/5
+Content-Type: application/json
+
+### 게시글 수정
+PUT http://localhost:8080/v1/board/1
+Content-Type: application/json
+
+{
+  "title": "Modified Title",
+  "content": "Modified Content",
+  "writer": "Writer2"
+}
+
+### 게시글 삭제
+DELETE http://localhost:8080/v1/board/7
+Content-Type: application/json

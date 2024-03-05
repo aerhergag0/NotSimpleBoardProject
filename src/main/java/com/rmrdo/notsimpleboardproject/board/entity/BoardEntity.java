@@ -28,4 +28,9 @@ public class BoardEntity extends BaseTimeEntity {
 
 	@Column(columnDefinition = "int default 0")
 	private int likeCnt;
+
+	public void updateTitleAndContent(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
 }
