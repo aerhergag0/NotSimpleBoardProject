@@ -1,0 +1,41 @@
+### 게시글 등록 실패(제목 누락)
+POST http://localhost:8080/v1/board
+Content-Type: application/json
+
+{
+  "content": "내용"
+}
+
+### 게시글 등록 실패(제목 글자수 초과)
+POST http://localhost:8080/v1/board
+Content-Type: application/json
+
+{
+  "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "content": "내용"
+}
+
+### 게시글 등록 실패(내용 누락)
+POST http://localhost:8080/v1/board
+Content-Type: application/json
+
+{
+  "title": "제목"
+}
+
+### 게시글 조회 실패(없는 게시글)
+GET http://localhost:8080/v1/board/100
+Content-Type: application/json
+
+### 게시글 수정 실패(없는 게시글)
+PUT http://localhost:8080/v1/board/100
+Content-Type: application/json
+
+{
+  "title": "수정할 제목",
+  "content": "수정할 내용"
+}
+
+### 게시글 삭제 실패(없는 게시글)
+DELETE http://localhost:8080/v1/board/100
+

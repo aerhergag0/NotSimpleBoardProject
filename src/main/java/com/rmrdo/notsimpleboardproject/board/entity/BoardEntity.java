@@ -30,7 +30,7 @@ public class BoardEntity extends BaseTimeEntity {
 	private int likeCnt;
 
 	public void updateTitleAndContent(String title, String content) {
-		this.title = title;
+		this.title   = title;
 		this.content = content;
 	}
 }
