@@ -8,6 +8,8 @@ import com.rmrdo.notsimpleboardproject.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class BoardService {
@@ -30,8 +32,12 @@ public class BoardService {
 		return mapper.boardEntityToBoardResponse(entity);
 	}
 
-	public BoardResponse putBoard(Long id, BoardRequest boardRequest) {
+	public List<BoardResponse> getBoardAll() {
+		var entity = boardRepository.findAll();
+		return mapper.boardEntityListToBoardResponseList(entity);
+	}
 
+	public BoardResponse putBoard(Long id, BoardRequest boardRequest) {
 		var entity = boardRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("Not Found"));
 
@@ -41,8 +47,8 @@ public class BoardService {
 
 		return mapper.boardEntityToBoardResponse(entity);
 	}
-	public BoardResponse deleteBoard(Long id) {
 
+	public BoardResponse deleteBoard(Long id) {
 		var entity = boardRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("Not Found"));
 

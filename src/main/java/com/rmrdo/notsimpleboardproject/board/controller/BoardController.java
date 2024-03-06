@@ -7,6 +7,8 @@ import com.rmrdo.notsimpleboardproject.common.utils.ApiUtils.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.rmrdo.notsimpleboardproject.common.utils.ApiUtils.success;
 
 @RestController
@@ -25,6 +27,12 @@ public class BoardController {
 	@GetMapping("/{id}")
 	public ApiResult<BoardResponse> getBoardOne(@PathVariable Long id) {
 		var response = boardService.getBoardOne(id);
+		return success(response);
+	}
+
+	@GetMapping
+	public ApiResult<List<BoardResponse>> getBoardAll() {
+		var response = boardService.getBoardAll();
 		return success(response);
 	}
 

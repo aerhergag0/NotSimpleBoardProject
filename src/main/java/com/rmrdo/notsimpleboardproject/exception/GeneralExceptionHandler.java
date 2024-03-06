@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-@ControllerAdvice
+@RestControllerAdvice
 @Log4j2
 public class GeneralExceptionHandler {
 
@@ -27,7 +27,7 @@ public class GeneralExceptionHandler {
 		return new ResponseEntity<>(ApiUtils.error(message, status), headers, status);
 	}
 
-	@ExceptionHandler({
+	@ExceptionHandler(value = {
 			NoHandlerFoundException.class,
 			NotFoundException.class
 	})
@@ -35,12 +35,12 @@ public class GeneralExceptionHandler {
 		return newResponse(e, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(UnauthorizedException.class)
+	@ExceptionHandler(value = UnauthorizedException.class)
 	public ResponseEntity<?> handleUnauthorizedException(Exception e) {
 		return newResponse(e, HttpStatus.UNAUTHORIZED);
 	}
 
-	@ExceptionHandler({
+	@ExceptionHandler(value = {
 			IllegalArgumentException.class,
 			IllegalStateException.class,
 			ConstraintViolationException.class,
@@ -57,17 +57,17 @@ public class GeneralExceptionHandler {
 		return newResponse(e, HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(HttpMediaTypeException.class)
+	@ExceptionHandler(value = HttpMediaTypeException.class)
 	public ResponseEntity<?> handleHttpMediaTypeException(Exception e) {
 		return newResponse(e, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
-	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	@ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<?> handleMethodNotAllowedException(Exception e) {
 		return newResponse(e, HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
-	@ExceptionHandler({Exception.class, RuntimeException.class})
+	@ExceptionHandler(value = {Exception.class, RuntimeException.class})
 	public ResponseEntity<?> handleException(Exception e) {
 		log.error("Unexpected exception occurred: {}", e.getMessage(), e);
 		return newResponse(e, HttpStatus.INTERNAL_SERVER_ERROR);
