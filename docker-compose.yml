@@ -1,0 +1,17 @@
+services:
+  database:
+    container_name: nsbp-database
+    image: mysql:8.0.26
+    ports:
+      - 55555:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+    command:
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--skip-character-set-client-handshake'
+    environment:
+      MYSQL_ROOT_PASSWORD: 1Q2w3e4r!!
+      MYSQL_DATABASE: nsbp
+      TZ: Asia/Seoul
+    restart: unless-stopped
