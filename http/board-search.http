@@ -1,0 +1,17 @@
+### 게시글 통합 검색
+POST http://localhost:8080/v1/board/search
+Content-Type: application/json
+
+{
+  "keyword": "test"
+}
+
+### 게시글 통합 필터 검색
+POST http://localhost:8080/v1/board/search/filter
+Content-Type: application/json
+
+{
+  "keyword": "test",
+  "start_date": "2024-03-26",
+  "end_date": "2024-03-26"
+}

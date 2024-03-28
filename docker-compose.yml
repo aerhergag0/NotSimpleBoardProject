@@ -1,3 +1,7 @@
+networks:
+  elk:
+    driver: bridge
+
 services:
   database:
     container_name: nsbp-database
@@ -11,7 +15,9 @@ services:
       - '--collation-server=utf8mb4_unicode_ci'
       - '--skip-character-set-client-handshake'
     environment:
-      MYSQL_ROOT_PASSWORD: 1Q2w3e4r!!
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: nsbp
       TZ: Asia/Seoul
+    networks:
+      - elk
     restart: unless-stopped
