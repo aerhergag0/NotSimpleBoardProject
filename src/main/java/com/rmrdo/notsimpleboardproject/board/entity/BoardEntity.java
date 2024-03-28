@@ -1,8 +1,10 @@
 package com.rmrdo.notsimpleboardproject.board.entity;
 
-import com.rmrdo.notsimpleboardproject.common.utils.BaseTimeEntity;
+import com.rmrdo.notsimpleboardproject.common.utils.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Getter
 @ToString
@@ -11,7 +13,9 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "board")
-public class BoardEntity extends BaseTimeEntity {
+@SQLDelete(sql = "UPDATE board SET is_deleted = true WHERE id = ?")
+@SQLRestriction("is_deleted = false")
+public class BoardEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +32,9 @@ public class BoardEntity extends BaseTimeEntity {
 
 	@Column(columnDefinition = "int default 0")
 	private int likeCnt;
+
+	@Column(columnDefinition = "int default 0")
+	private boolean isDeleted;
 
 	public void updateTitleAndContent(String title, String content) {
 		this.title   = title;
