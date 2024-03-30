@@ -1,10 +1,13 @@
 package com.rmrdo.notsimpleboardproject.board.entity;
 
 import com.rmrdo.notsimpleboardproject.common.utils.BaseEntity;
+import com.rmrdo.notsimpleboardproject.reply.entity.ReplyEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+
+import java.util.List;
 
 @Getter
 @ToString
@@ -13,8 +16,8 @@ import org.hibernate.annotations.SQLRestriction;
 @Builder
 @Entity
 @Table(name = "board")
-@SQLDelete(sql = "UPDATE board SET is_deleted = true WHERE id = ?")
-@SQLRestriction("is_deleted = false")
+@SQLDelete(sql = "UPDATE board SET deleted = true WHERE id = ?")
+@SQLRestriction("deleted = false")
 public class BoardEntity extends BaseEntity {
 
 	@Id
@@ -34,7 +37,11 @@ public class BoardEntity extends BaseEntity {
 	private int likeCnt;
 
 	@Column(columnDefinition = "int default 0")
-	private boolean isDeleted;
+	private boolean deleted;
+
+
+	@OneToMany(mappedBy = "postId")
+	private List<ReplyEntity> replies;
 
 	public void updateTitleAndContent(String title, String content) {
 		this.title   = title;
