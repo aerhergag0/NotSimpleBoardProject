@@ -25,7 +25,7 @@ public class BoardDoc {
 
 	private int likeCnt;
 
-	private boolean isDeleted;
+	private boolean deleted;
 
 	private LocalDateTime createdAt;
 

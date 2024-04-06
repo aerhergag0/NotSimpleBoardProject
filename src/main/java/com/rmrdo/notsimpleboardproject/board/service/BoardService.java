@@ -18,11 +18,11 @@ public class BoardService {
 
 	private final BoardRepository boardRepository;
 
-	private static final BoardMapper         mapper         = BoardMapper.INSTANCE;
+	private static final BoardMapper         boardMapper    = BoardMapper.INSTANCE;
 	private static final BoardResponseMapper responseMapper = BoardResponseMapper.INSTANCE;
 
 	public BoardResponse postBoard(BoardRequest boardRequest) {
-		var entity = mapper.toEntity(boardRequest);
+		var entity = boardMapper.toEntity(boardRequest);
 		var newEntity = boardRepository.save(entity);
 
 		return responseMapper.toDto(newEntity);
@@ -37,7 +37,7 @@ public class BoardService {
 
 	public List<BoardResponse> getBoardAll() {
 		var entity = boardRepository.findAllByOrderByIdDesc(
-				PageRequest.of(0, 20));
+				PageRequest.of(0, 10));
 
 		return responseMapper.toDtoList(entity.getContent());
 	}

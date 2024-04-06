@@ -1,36 +1,35 @@
-package com.rmrdo.notsimpleboardproject.board.entity;
+package com.rmrdo.notsimpleboardproject.reply.entity;
 
 import com.rmrdo.notsimpleboardproject.common.utils.BaseEntity;
-import com.rmrdo.notsimpleboardproject.reply.entity.ReplyEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "board")
-@SQLDelete(sql = "UPDATE board SET deleted = true WHERE id = ?")
+@Table(name = "reply")
+@SQLDelete(sql = "UPDATE reply SET deleted = true WHERE id = ?")
 @SQLRestriction("deleted = false")
-public class BoardEntity extends BaseEntity {
+public class ReplyEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 255, nullable = false)
-	private String title;
+	@Column(name = "post_id", nullable = false)
+	private Long postId;
 
-	@Column(length = 50, nullable = false)
-	private String writer;
+	@Column(name = "user_id", columnDefinition = "BINARY(16)")
+	private UUID userId;
 
-	@Column(columnDefinition = "text")
+	@Column(length = 1024, nullable = false)
 	private String content;
 
 	@Column(columnDefinition = "int default 0")
@@ -40,11 +39,11 @@ public class BoardEntity extends BaseEntity {
 	private boolean deleted;
 
 
-	@OneToMany(mappedBy = "postId")
-	private List<ReplyEntity> replies;
+	@OneToMany(mappedBy = "parentId")
+	private List<SubReplyEntity> subReplies;
 
-	public void updateTitleAndContent(String title, String content) {
-		this.title   = title;
+
+	public void updateContent(String content) {
 		this.content = content;
 	}
 }
