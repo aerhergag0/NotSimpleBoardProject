@@ -6,25 +6,25 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
-import java.util.List;
 import java.util.UUID;
 
 @Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "reply")
-@SQLDelete(sql = "UPDATE reply SET deleted = true WHERE id = ?")
+@Table(name = "sub_reply")
+@SQLDelete(sql = "UPDATE sub_reply SET deleted = true WHERE id = ?")
 @SQLRestriction("deleted = false")
-public class ReplyEntity extends BaseEntity {
+public class SubReplyEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "post_id", nullable = false)
-	private Long postId;
+	@Column(name = "parent_id")
+	private Long parentId;
 
 	@Column(name = "user_id", columnDefinition = "BINARY(16)")
 	private UUID userId;
@@ -37,10 +37,6 @@ public class ReplyEntity extends BaseEntity {
 
 	@Column(columnDefinition = "int default 0")
 	private boolean deleted;
-
-
-	@OneToMany(mappedBy = "parentId")
-	private List<SubReplyEntity> subReplies;
 
 
 	public void updateContent(String content) {

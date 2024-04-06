@@ -13,10 +13,8 @@ import java.util.UUID;
 @Builder
 public class ReplyRequest {
 
-	private Long    id;
-	private String  content;
-	private Long    postId;
-	private UUID    userId;
-	private boolean parentComment;
-	private int     parentCommentId;
+	private Long   id;
+	private String content;
+	private Long   postId;
+	private UUID   userId;
 }

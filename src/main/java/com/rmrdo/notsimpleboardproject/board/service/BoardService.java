@@ -37,7 +37,7 @@ public class BoardService {
 
 	public List<BoardResponse> getBoardAll() {
 		var entity = boardRepository.findAllByOrderByIdDesc(
-				PageRequest.of(0, 20));
+				PageRequest.of(0, 10));
 
 		return responseMapper.toDtoList(entity.getContent());
 	}

@@ -11,12 +11,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReplyResponse {
+public class SubReplyRequest {
 
-	private Long    id;
-	private Long    postId;
-	private UUID    userId;
-	private String  content;
-	private int     likeCnt;
-	private boolean deleted;
+	private Long   id;
+	private String content;
+	private Long   parentId;
+	private UUID   userId;
 }
