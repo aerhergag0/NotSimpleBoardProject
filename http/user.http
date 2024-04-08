@@ -1,0 +1,21 @@
+### 사용자 등록
+POST http://localhost:8080/v1/user/register
+Content-Type: application/json
+
+{
+  "user_id": "testuser",
+  "password": "testpassword",
+  "user_name": "testname",
+  "email": "testemail@gmail.com",
+  "phone_number": "010-1234-5678",
+  "profile_img": "https://s3.ap-northeast-2.amazonaws.com/test/1.jpg"
+}
+
+### 사용자 탈퇴
+DELETE http://localhost:8080/v1/user/unregister
+Content-Type: application/json
+
+{
+  "user_id": "testuser",
+  "password": "testpassword"
+}

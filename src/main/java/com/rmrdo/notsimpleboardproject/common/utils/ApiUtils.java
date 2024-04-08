@@ -10,6 +10,10 @@ public class ApiUtils {
 		return new ApiResult<>(true, response, null);
 	}
 
+	public static <T> ApiResult<T> success(String message, T response) {
+		return new ApiResult<>(true, response, null, message);
+	}
+
 	public static <T> ApiResult<?> error(Throwable throwable, HttpStatus status) {
 		return new ApiResult<>(false, null, new ApiError(throwable, status));
 	}
@@ -41,5 +45,10 @@ public class ApiUtils {
 		private final boolean           success;
 		private final T                 response;
 		private final ApiUtils.ApiError error;
+		private final String            message;
+
+		public ApiResult(boolean success, T response, ApiUtils.ApiError error) {
+			this(success, response, error, null);
+		}
 	}
 }

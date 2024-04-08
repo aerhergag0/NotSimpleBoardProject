@@ -2,7 +2,10 @@ package com.rmrdo.notsimpleboardproject.reply.entity;
 
 import com.rmrdo.notsimpleboardproject.common.utils.BaseEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
