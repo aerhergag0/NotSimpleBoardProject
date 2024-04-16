@@ -3,6 +3,9 @@ spring:
     name: not-simple-board-project
   profiles:
     active: key
+  mvc:
+    favicon:
+      enabled: false
 
   jpa:
     properties:
@@ -15,6 +18,9 @@ spring:
       ddl-auto: validate
 
   data:
+    redis:
+      repositories:
+        enabled: false
     elasticsearch:
       repositories:
         enabled: false

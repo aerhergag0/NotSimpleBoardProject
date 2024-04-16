@@ -45,10 +45,9 @@ public class ApiUtils {
 		private final boolean           success;
 		private final T                 response;
 		private final ApiUtils.ApiError error;
-		private final String            message;
 
-		public ApiResult(boolean success, T response, ApiUtils.ApiError error) {
-			this(success, response, error, null);
+		public ApiResult(boolean success, T response, ApiUtils.ApiError error, String message) {
+			this(success, response, error);
 		}
 	}
 }

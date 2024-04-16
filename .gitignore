@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 data.ms
+/mysql
 
 ### STS ###
 .apt_generated
@@ -36,6 +37,8 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+
 
 ### VS Code ###
 .vscode/

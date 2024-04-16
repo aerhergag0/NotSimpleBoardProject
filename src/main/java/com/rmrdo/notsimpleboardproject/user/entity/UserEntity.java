@@ -33,33 +33,42 @@ public class UserEntity extends BaseEntity {
 	@Column(columnDefinition = "VARBINARY(16)")
 	private UUID id;
 
-	@Column(length = 50, nullable = false)
+	//	@Column(length = 50, nullable = false)
 	private String userId;
 
-	@Column(length = 100, nullable = false)
+	//	@Column(length = 100, nullable = false)
 	private String password;
 
-	@Column(length = 100, nullable = false)
+	//	@Column(length = 100, nullable = false)
 	private String userName;
 
-	@Column(length = 100, nullable = false)
+	//	@Column(length = 100, nullable = false)
 	private String email;
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 30)
 	private String phoneNumber;
 
-	@Column(length = 15, nullable = false, columnDefinition = "varchar(50) default 'USER'")
+	@Column(length = 15, columnDefinition = "varchar(50) default 'ROLE_USER'")
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	@Column(length = 255, nullable = false)
+	//	@Column(length = 255, nullable = false)
 	private String profileImg;
 
-	@Column(length = 50, nullable = false, columnDefinition = "varchar(50) default 'ACTIVE'")
+	@Column(length = 50, columnDefinition = "varchar(50) default 'ACTIVE'")
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 
 	private LocalDateTime lastLoginAt;
 
+	public String getRoleKey() {
+		return this.role.getKey();
+	}
 
+	public UserEntity update(String name, String picture) {
+		this.userName   = name;
+		this.profileImg = picture;
+
+		return this;
+	}
 }

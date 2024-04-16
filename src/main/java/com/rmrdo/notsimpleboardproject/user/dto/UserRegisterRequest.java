@@ -40,5 +40,5 @@ public class UserRegisterRequest {
 	private UserStatus status = UserStatus.ACTIVE;
 
 	@Builder.Default
-	private UserRole role = UserRole.USER;
+	private UserRole role = UserRole.ROLE_USER;
 }
