@@ -3,6 +3,7 @@ package com.rmrdo.notsimpleboardproject.user.dto;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Getter
@@ -58,15 +59,17 @@ public class OAuthAttributes {
 	}
 
 	private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
-		Map<String, Object> response = (Map<String, Object>) attributes.get("kakao_account");
-		Map<String, Object> profile = (Map<String, Object>) response.get("profile");
-//		Map<String, Object> kakaoAttributes =
+		Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+		Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
+
+		Map<String, Object> kakaoAttributes = new HashMap<>(kakaoAccount);
+		kakaoAttributes.put("id", attributes.get("id"));
 
 		return OAuthAttributes.builder()
 				.name((String) profile.get("nickname"))
-				.email((String) response.get("email"))
+				.email((String) kakaoAccount.get("email"))
 				.picture((String) profile.get("profile_image_url"))
-				.attributes(response)
+				.attributes(kakaoAttributes)
 				.nameAttributeKey(userNameAttributeName)
 				.build();
 	}
